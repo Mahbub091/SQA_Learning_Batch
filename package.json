@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test:headless": "npx playwright test",
+    "test:ui": "npx playwright test --ui"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mahbub091/SQA_Learning_Batch.git"
@@ -19,5 +22,9 @@
   "devDependencies": {
     "@playwright/test": "^1.64.0",
     "@types/node": "^26.6.5"
+  },
+  "dependencies": {
+    "dotenv": "^18.0.8",
+    "zod": "^4.6.7"
   }
 }
