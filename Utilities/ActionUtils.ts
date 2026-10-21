@@ -21,4 +21,40 @@ export default class ActionUtils {
       throw error;
     }
   }
+
+  async ClickElement(locator: Locator): Promise<void> {
+    try {
+      await locator.click();
+    } catch (error) {
+      console.error("Error occurred while clicking the element:", error);
+      throw error;
+    }
+  }
+
+  async TypeText(locator: Locator, text: string): Promise<void> {
+    try {
+      await locator.fill(text);
+    } catch (error) {
+      console.error("Error occurred while typing text:", error);
+      throw error;
+    }
+  }
+
+  async GetElementText(locator: Locator): Promise<string> {
+    try {
+      return await locator.textContent() || "";
+    } catch (error) {
+      console.error("Error occurred while getting element text:", error);
+      throw error;
+    }
+  }
+
+  async AssertElementVisible(locator: Locator): Promise<void> {
+    try {
+      await expect(locator).toBeVisible();
+    } catch (error) {
+      console.error("Error occurred while asserting element visibility:", error);
+      throw error;
+    }
+  }
 }
