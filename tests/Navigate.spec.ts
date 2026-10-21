@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../../PageObjectModel/Login.page';
-import ActionUtils from '../../Utilities/ActionUtils';
+import { LoginPage } from '../PageObjectModel/Login.page';
+import ActionUtils from '../Utilities/ActionUtils';
 import dotenv from 'dotenv';
 dotenv.config();
-import { LoginHelper } from '../../Utilities/Helper/Login.Helper';
+import { LoginHelper } from '../Utilities/Helper/Login.Helper';
 
 test.describe('Login Page Navigation', () => {
   test(
