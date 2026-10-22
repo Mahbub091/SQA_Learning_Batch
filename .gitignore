@@ -1,0 +1,117 @@
+# ====================================================================
+# RECOMMENDED COMPREHENSIVE GITIGNORE TEMPLATE
+# ====================================================================
+
+# --------------------------------------------------------------------
+# 1. Sensitive Data & Credentials (CRITICAL)
+# --------------------------------------------------------------------
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+*.keystore
+*.jks
+*.p12
+
+# --------------------------------------------------------------------
+# 2. Dependency Folders (Heavy & reproducible)
+# --------------------------------------------------------------------
+node_modules/
+jspm_packages/
+.pnpm-store/
+.venv/
+venv/
+env/
+ENV/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+vendor/
+
+# --------------------------------------------------------------------
+# 3. Build & Compilation Outputs
+# --------------------------------------------------------------------
+dist/
+build/
+out/
+target/
+bin/
+obj/
+*.exe
+*.dll
+*.so
+*.dylib
+*.app
+*.class
+*.o
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+.pytest_cache/
+.eslintcache
+.parcel-cache
+.turbo/
+.next/
+.nuxt/
+
+# --------------------------------------------------------------------
+# 4. Operating System Metadata
+# --------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# --------------------------------------------------------------------
+# 5. IDE & Code Editor Configurations
+# --------------------------------------------------------------------
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+.project
+.classpath
+.cproject
+.settings/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# --------------------------------------------------------------------
+# 6. Logs, Caches, & Runtime Files
+# --------------------------------------------------------------------
+*.log
+logs/
+*.tmp
+*.bak
+*.swp
+*~
+*.pid
+*.seed
+*.pid.lock
+
+# --------------------------------------------------------------------
+# 7. Local Databases & Data Dumps
+# --------------------------------------------------------------------
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.dump
