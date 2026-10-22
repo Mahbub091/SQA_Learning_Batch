@@ -14,4 +14,4 @@
 *Utilities
 *BrowserTeardown
 *Faker
-*Winston
+*Winstone
