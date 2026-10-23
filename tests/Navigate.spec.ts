@@ -1,9 +1,6 @@
-import { test, expect } from '@playwright/test';
-import { LoginPage } from '../PageObjectModel/Login.page';
-import ActionUtils from '../Utilities/ActionUtils';
+import { test } from '../Utilities/fixtures/base.fixture';
 import dotenv from 'dotenv';
 dotenv.config();
-import { LoginHelper } from '../Utilities/Helper/Login.Helper';
 
 test.describe('Login Page Navigation', () => {
   test(
@@ -11,9 +8,8 @@ test.describe('Login Page Navigation', () => {
     {
       tag: ['@e2e', '@navigation'],
     },
-    async ({ page }) => {
-      const loginHelper = new LoginHelper(page);
-      await loginHelper.NavigateToTheLandingPage();
+    async ({ userLoginActions }) => {
+      await userLoginActions.UserShouldSeeProperErrorDuringLoginWithInvalidCredentials();
     },
   );
 });
