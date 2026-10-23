@@ -16,23 +16,6 @@
 *Faker
 *Winstone
 
-*GlobalResources 
-*PageObjectModel
-*tests
-*env.example
-*env.
-*gitignore
-*prettierrc
-*eslint.config.mjs
-*package.json
-*package-lock.josn
-*playwright.config.ts
-*README.md
-*tsconfig.json
-*Utilities
-*BrowserTeardown
-
-
 Test suite structure
 
 1. Registration and authentication
