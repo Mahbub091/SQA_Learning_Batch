@@ -1,22 +1,23 @@
 {
-  "name": "complete_paywright_project",
+  "name": "sqa_learning_batch",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test:headless": "npx playwright test",
-    "test:ui": "npx playwright test --ui",
-    "test:e2e": "npx playwright test --grep @e2e"
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mahbub091/SQA_Learning_Batch.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@playwright/test": "^1.64.1",
-    "@types/node": "^26.6.5"
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Mahbub091/SQA_Learning_Batch/issues"
   },
-  "dependencies": {
-    "dotenv": "^18.0.9",
-    "zod": "^4.6.7"
+  "homepage": "https://github.com/Mahbub091/SQA_Learning_Batch#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@types/node": "^26.6.5"
   }
 }
