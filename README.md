@@ -13,7 +13,8 @@
 *tsconfig.json
 *Utilities
 *BrowserTeardown
-
+*Winstone
+*Faker
 
 Test suite structure
 
