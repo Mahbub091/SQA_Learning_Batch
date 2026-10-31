@@ -1,24 +1,44 @@
 {
-  "name": "playwright-demoshop-e2e-testing",
+  "name": "sqa_learning_batch",
   "version": "1.0.0",
-  "description": "",
+  "description": "Playwright + TypeScript E2E suite for the Tricentis Demo Web Shop",
   "main": "index.js",
   "scripts": {
     "test:headless": "npx playwright test",
-    "test:ui": "npx playwright test --ui"
+    "test:headed": "npx playwright test --headed",
+    "test:ui": "npx playwright test --ui",
+    "test:e2e": "npx playwright test --grep @e2e",
+    "test:auth": "npx playwright test --grep @auth",
+    "test:registration": "npx playwright test --grep @registration",
+    "test:login": "npx playwright test --grep @login",
+    "test:catalog": "npx playwright test --grep @catalog",
+    "test:navigation": "npx playwright test --grep @navigation",
+    "test:search": "npx playwright test --grep @search",
+    "typecheck": "tsc --noEmit",
+    "report": "npx playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mahbub091/SQA_Learning_Batch.git"
   },
   "keywords": [],
+  "author": "",
+  "license": "ISC",
   "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Mahbub091/SQA_Learning_Batch/issues"
+  },
+  "homepage": "https://github.com/Mahbub091/SQA_Learning_Batch#readme",
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",
-    "@playwright/test": "^1.64.1",
+    "@playwright/test": "^1.64.0",
     "@types/node": "^26.6.5",
-    "dotenv": "^18.0.8",
     "eslint": "^10.13.0",
     "prettier": "^3.9.10",
-    "zod": "^4.6.7"
+    "typescript": "^5.9.0"
   },
   "dependencies": {
-    "winston": "^3.19.0"
+    "dotenv": "^18.0.8",
+    "zod": "^4.6.7"
   }
 }

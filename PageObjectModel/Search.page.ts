@@ -1,12 +1,18 @@
 import { Page, Locator } from '@playwright/test';
 
+/**
+ * Page object for the Search page (basic form, "Advanced search" section and the results list).
+ * A page object only describes WHERE things are (locators); it never clicks or asserts.
+ */
 export class SearchPage {
+  /** The main search form. */
   readonly SearchFeature: {
     readonly pageHeading: Locator;
     readonly searchTermInput: Locator;
     readonly searchButton: Locator;
   };
 
+  /** The extra options that appear after ticking "Advanced search". */
   readonly AdvancedSearch: {
     readonly advancedCheckbox: Locator;
     readonly categorySelect: Locator;
@@ -17,11 +23,13 @@ export class SearchPage {
     readonly searchInDescriptionCheckbox: Locator;
   };
 
+  /** What the page shows after a search was submitted. */
   readonly Results: {
     readonly resultsContainer: Locator;
     readonly productItems: Locator;
     readonly productTitles: Locator;
     readonly productPrices: Locator;
+    /** The yellow warning box, e.g. "Search term minimum length is 3 characters". */
     readonly warning: Locator;
   };
 

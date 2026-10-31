@@ -1,6 +1,7 @@
-import { test } from '../Utilities/fixtures/base.fixture';
-import { searchData } from '../Utilities/testData/search.data';
+import { test } from '@root/Utilities/fixtures/base.fixture';
+import { searchData } from '@root/Utilities/testData/search.data';
 
+// Tags (e.g. @search) let you run a group: `npx playwright test --grep @search`.
 test.describe('Search', { tag: ['@search'] }, () => {
   test.describe('basic search', () => {
     test(
@@ -19,6 +20,7 @@ test.describe('Search', { tag: ['@search'] }, () => {
       await searchActions.UserShouldFindProductWithPressingEnter();
     });
 
+    // One generated test per letter-case variation ("LAPTOP", "Laptop", "lApToP").
     for (const variation of searchData.caseVariations) {
       test(`is case-insensitive ("${variation}")`, async ({ searchActions }) => {
         await searchActions.SearchShouldBeCaseInsensitive(variation);
@@ -35,6 +37,7 @@ test.describe('Search', { tag: ['@search'] }, () => {
       await searchActions.UserShouldSeeAlertForEmptyHeaderSearch();
     });
 
+    // The site needs at least 3 characters, so every shorter term must be rejected.
     for (const term of searchData.tooShortTerms) {
       test(`enforces the minimum length on the search page ("${term}")`, async ({
         searchActions,

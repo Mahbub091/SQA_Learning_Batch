@@ -1,6 +1,10 @@
 import { Page, Locator } from '@playwright/test';
-import { exactNameRegex } from '../Utilities/textUtils';
+import { exactNameRegex } from '@root/Utilities/textUtils';
 
+/**
+ * Page object for the header at the top of every page: logo, main menu and the search box.
+ * A page object only describes WHERE things are (locators); it never clicks or asserts.
+ */
 export class HeaderPage {
   readonly HeaderFeature: {
     readonly logo: Locator;
@@ -26,10 +30,12 @@ export class HeaderPage {
     };
   }
 
+  /** A link in the main menu found by its exact text, e.g. "Computers". */
   topMenuLink(name: string): Locator {
     return this.page.locator(`css=.top-menu`).getByRole('link', { name: exactNameRegex(name) });
   }
 
+  /** A link in the drop-down that opens under a main menu item, e.g. "Computers" > "Desktops". */
   topMenuSubLink(parent: string, name: string): Locator {
     return this.page
       .locator(`css=.top-menu > li`)

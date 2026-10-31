@@ -1,5 +1,6 @@
-import { test } from '../Utilities/fixtures/base.fixture';
+import { test } from '@root/Utilities/fixtures/base.fixture';
 
+// Tags (e.g. @registration) let you run a group: `npx playwright test --grep @registration`.
 test.describe('Registration', { tag: ['@auth', '@registration'] }, () => {
   test(
     'registers with valid data, shows the success message and logs the user in',
@@ -18,6 +19,7 @@ test.describe('Registration', { tag: ['@auth', '@registration'] }, () => {
   );
 
   test.describe('required-field validation', () => {
+    // One generated test per required field.
     for (const field of ['firstName', 'lastName', 'email', 'password'] as const) {
       test(`shows an error when ${field} is empty`, async ({ userRegisterActions }) => {
         await userRegisterActions.UserShouldSeeRequiredErrorForField(field);

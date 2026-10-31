@@ -1,0 +1,31 @@
+{
+  "ErrorMessages": {
+    "wrongEmailOrPasswordError": "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found",
+
+    "loginUnsuccessfulError": "Login was unsuccessful",
+    "noCustomerAccountError": "No customer account found",
+    "incorrectCredentialsError": "The credentials provided are incorrect",
+    "loginEmailRequiredError": "Please enter your email",
+
+    "firstNameRequiredError": "First name is required",
+    "lastNameRequiredError": "Last name is required",
+    "emailRequiredError": "Email is required",
+    "wrongEmailError": "Wrong email",
+    "passwordRequiredError": "Password is required",
+    "passwordTooShortError": "password should have at least 6 characters",
+    "passwordMismatchError": "password and confirmation password do not match",
+    "duplicateEmailError": "The specified email already exists",
+
+    "forgotPasswordEmptyEmailError": "Enter your email",
+    "forgotPasswordEmailNotFoundError": "Email not found",
+
+    "searchNoResultsError": "No products were found that matched your criteria",
+    "searchMinLengthError": "Search term minimum length is 3 characters",
+    "searchEmptyAlertError": "Please enter some search keyword"
+  },
+
+  "SuccessMessages": {
+    "registrationCompleted": "Your registration completed",
+    "passwordRecoveryEmailSent": "Email with instructions has been sent to you"
+  }
+}

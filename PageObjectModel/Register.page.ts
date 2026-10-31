@@ -1,6 +1,11 @@
 import { Page, Locator } from '@playwright/test';
 
+/**
+ * Page object for the Register page (create a new account).
+ * A page object only describes WHERE things are (locators); it never clicks or asserts.
+ */
 export class RegisterPage {
+  /** The form fields and buttons. */
   readonly RegisterFeature: {
     readonly registerLink: Locator;
     readonly genderMale: Locator;
@@ -14,6 +19,7 @@ export class RegisterPage {
     readonly continueButton: Locator;
   };
 
+  /** Red validation texts: one under each field, plus one summary box for server-side errors. */
   readonly validationMessages: {
     readonly firstNameError: Locator;
     readonly lastNameError: Locator;
@@ -23,12 +29,14 @@ export class RegisterPage {
     readonly summaryErrors: Locator;
   };
 
+  /** Texts shown after a successful registration. */
   readonly messages: {
     readonly registrationResult: Locator;
   };
 
   constructor(private page: Page) {
     this.RegisterFeature = {
+      // The "Register" link in the page header.
       registerLink: this.page.locator(`css=.ico-register`),
       genderMale: this.page.locator(`css=#gender-male`),
       genderFemale: this.page.locator(`css=#gender-female`),
@@ -38,6 +46,7 @@ export class RegisterPage {
       passwordInput: this.page.locator(`css=#Password`),
       confirmPasswordInput: this.page.locator(`css=#ConfirmPassword`),
       registerButton: this.page.locator(`css=#register-button`),
+      // The "Continue" button on the "Your registration completed" page.
       continueButton: this.page.locator(`css=.register-continue-button`),
     };
 

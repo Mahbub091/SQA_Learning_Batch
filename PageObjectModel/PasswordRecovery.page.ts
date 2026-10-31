@@ -1,5 +1,9 @@
 import { Page, Locator } from '@playwright/test';
 
+/**
+ * Page object for the "Password recovery" (forgot password) page.
+ * A page object only describes WHERE things are (locators); it never clicks or asserts.
+ */
 export class PasswordRecoveryPage {
   readonly PasswordRecoveryFeature: {
     readonly pageHeading: Locator;
@@ -7,8 +11,11 @@ export class PasswordRecoveryPage {
     readonly recoverButton: Locator;
   };
 
+  /** Texts the page shows after the form is submitted. */
   readonly messages: {
+    /** Validation text under the e-mail field. */
     readonly emailFieldError: Locator;
+    /** The result box, e.g. "Email with instructions has been sent to you." */
     readonly result: Locator;
     readonly summaryErrors: Locator;
   };

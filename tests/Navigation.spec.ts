@@ -1,6 +1,7 @@
-import { test } from '../Utilities/fixtures/base.fixture';
-import { footerLinks, subCategories, topCategories } from '../Utilities/testData/catalog.data';
+import { test } from '@root/Utilities/fixtures/base.fixture';
+import { footerLinks, subCategories, topCategories } from '@root/Utilities/testData/catalog.data';
 
+// The lists come from `catalog.data.ts`: adding a category there automatically adds its tests here.
 test.describe('Navigation', { tag: ['@navigation'] }, () => {
   test('lands on the home page', { tag: ['@e2e', '@smoke'] }, async ({ navigationActions }) => {
     await navigationActions.UserShouldLandOnTheHomePage();
@@ -41,6 +42,7 @@ test.describe('Navigation', { tag: ['@navigation'] }, () => {
       });
     }
 
+    // One category is enough to prove the "Home" link works (here: the first one, "Books").
     test('Home link returns to the landing page', async ({ navigationActions }) => {
       await navigationActions.UserShouldReturnHomeFromBreadcrumb(topCategories[0]);
     });

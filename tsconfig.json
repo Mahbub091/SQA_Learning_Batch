@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    // "@root/..." always means "start from the project root folder".
+    // Example: '@root/Utilities/ActionUtils' instead of '../../Utilities/ActionUtils'.
+    // Playwright reads this same setting, so the alias works when tests run, not only in the editor.
     "paths": {
       "@root/*": ["./*"]
     },
@@ -9,6 +12,7 @@
     "esModuleInterop": true,
     "moduleResolution": "Node16",
     "allowSyntheticDefaultImports": true,
+    // Lets us `import data from '@root/Data/StaticData.json'`.
     "resolveJsonModule": true,
     "isolatedModules": false,
     "noEmit": true,

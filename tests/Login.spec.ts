@@ -1,6 +1,8 @@
-import { test } from '../Utilities/fixtures/base.fixture';
+import { test } from '@root/Utilities/fixtures/base.fixture';
 
+// Tags (e.g. @login) let you run a group: `npx playwright test --grep @login`.
 test.describe('Login and logout', { tag: ['@auth', '@login'] }, () => {
+  // @smoke = a quick check that the most important flow still works.
   test(
     'logs in with valid credentials',
     { tag: ['@e2e', '@smoke'] },
@@ -36,6 +38,7 @@ test.describe('Login and logout', { tag: ['@auth', '@login'] }, () => {
   });
 
   test.describe('remember me', () => {
+    // `true` = "Remember me" ticked, `false` = unticked.
     test('keeps a persistent session when checked', async ({ userLoginActions }) => {
       await userLoginActions.UserSessionShouldFollowRememberMeChoice(true);
     });
