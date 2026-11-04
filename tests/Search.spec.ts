@@ -1,83 +1,80 @@
-import { test } from '@root/Utilities/fixtures/base.fixture';
-import { searchData } from '@root/Utilities/testData/search.data';
+import { test } from '../Utilities/fixtures/base.fixture';
+import { searchData } from '../Utilities/testData/search.data';
 
-// Tags (e.g. @search) let you run a group: `npx playwright test --grep @search`.
 test.describe('Search', { tag: ['@search'] }, () => {
-  test.describe('basic search', () => {
-    test(
-      'finds a product by its exact name',
-      { tag: ['@e2e', '@smoke'] },
-      async ({ searchActions }) => {
-        await searchActions.UserShouldFindProductByExactName();
-      },
-    );
+  test(
+    'basic: finds a product by its exact name',
+    { tag: ['@e2e', '@smoke'] },
+    async ({ searchActions }) => {
+      await searchActions.UserShouldFindProductByExactName();
+    },
+  );
 
-    test('finds products by a partial name', async ({ searchActions }) => {
-      await searchActions.UserShouldFindProductsByPartialName();
-    });
-
-    test('searches when Enter is pressed', async ({ searchActions }) => {
-      await searchActions.UserShouldFindProductWithPressingEnter();
-    });
-
-    // One generated test per letter-case variation ("LAPTOP", "Laptop", "lApToP").
-    for (const variation of searchData.caseVariations) {
-      test(`is case-insensitive ("${variation}")`, async ({ searchActions }) => {
-        await searchActions.SearchShouldBeCaseInsensitive(variation);
-      });
-    }
+  test('basic: finds products by a partial name', async ({ searchActions }) => {
+    await searchActions.UserShouldFindProductsByPartialName();
   });
 
-  test.describe('negative and boundary input', () => {
-    test('shows a message when nothing matches', async ({ searchActions }) => {
-      await searchActions.UserShouldSeeNoResultsMessage();
-    });
-
-    test('alerts on an empty header search', async ({ searchActions }) => {
-      await searchActions.UserShouldSeeAlertForEmptyHeaderSearch();
-    });
-
-    // The site needs at least 3 characters, so every shorter term must be rejected.
-    for (const term of searchData.tooShortTerms) {
-      test(`enforces the minimum length on the search page ("${term}")`, async ({
-        searchActions,
-      }) => {
-        await searchActions.UserShouldSeeMinimumLengthErrorOnSearchPage(term);
-      });
-
-      test(`enforces the minimum length from the header ("${term}")`, async ({ searchActions }) => {
-        await searchActions.UserShouldSeeMinimumLengthErrorFromHeader(term);
-      });
-    }
-
-    test('handles special characters', async ({ searchActions }) => {
-      await searchActions.SearchShouldHandleSpecialCharacters();
-    });
-
-    test('handles a very long search string', async ({ searchActions }) => {
-      await searchActions.SearchShouldHandleVeryLongString();
-    });
+  test('basic: searches when Enter is pressed', async ({ searchActions }) => {
+    await searchActions.UserShouldFindProductWithPressingEnter();
   });
 
-  test.describe('advanced search', () => {
-    test('searches a category together with its sub-categories', async ({ searchActions }) => {
-      await searchActions.AdvancedSearchShouldFindProductsInCategoryWithSubCategories();
+  for (const variation of searchData.caseVariations) {
+    test(`basic: is case-insensitive ("${variation}")`, async ({ searchActions }) => {
+      await searchActions.SearchShouldBeCaseInsensitive(variation);
+    });
+  }
+
+  test('negative: shows a message when nothing matches', async ({ searchActions }) => {
+    await searchActions.UserShouldSeeNoResultsMessage();
+  });
+
+  test('negative: alerts on an empty header search', async ({ searchActions }) => {
+    await searchActions.UserShouldSeeAlertForEmptyHeaderSearch();
+  });
+
+  for (const term of searchData.tooShortTerms) {
+    test(`negative: enforces the minimum length on the search page ("${term}")`, async ({
+      searchActions,
+    }) => {
+      await searchActions.UserShouldSeeMinimumLengthErrorOnSearchPage(term);
     });
 
-    test('excludes sub-categories when the option is off', async ({ searchActions }) => {
-      await searchActions.AdvancedSearchShouldExcludeSubCategoriesWhenNotSelected();
+    test(`negative: enforces the minimum length from the header ("${term}")`, async ({
+      searchActions,
+    }) => {
+      await searchActions.UserShouldSeeMinimumLengthErrorFromHeader(term);
     });
+  }
 
-    test('respects the price range', async ({ searchActions }) => {
-      await searchActions.AdvancedSearchShouldRespectPriceRange();
-    });
+  test('negative: handles special characters', async ({ searchActions }) => {
+    await searchActions.SearchShouldHandleSpecialCharacters();
+  });
 
-    test('returns nothing for an impossible price range', async ({ searchActions }) => {
-      await searchActions.AdvancedSearchShouldReturnNothingForImpossiblePriceRange();
-    });
+  test('negative: handles a very long search string', async ({ searchActions }) => {
+    await searchActions.SearchShouldHandleVeryLongString();
+  });
 
-    test('searching in descriptions never returns fewer results', async ({ searchActions }) => {
-      await searchActions.SearchInDescriptionsShouldNotReturnFewerResults();
-    });
+  test('advanced: searches a category together with its sub-categories', async ({
+    searchActions,
+  }) => {
+    await searchActions.AdvancedSearchShouldFindProductsInCategoryWithSubCategories();
+  });
+
+  test('advanced: excludes sub-categories when the option is off', async ({ searchActions }) => {
+    await searchActions.AdvancedSearchShouldExcludeSubCategoriesWhenNotSelected();
+  });
+
+  test('advanced: respects the price range', async ({ searchActions }) => {
+    await searchActions.AdvancedSearchShouldRespectPriceRange();
+  });
+
+  test('advanced: returns nothing for an impossible price range', async ({ searchActions }) => {
+    await searchActions.AdvancedSearchShouldReturnNothingForImpossiblePriceRange();
+  });
+
+  test('advanced: searching in descriptions never returns fewer results', async ({
+    searchActions,
+  }) => {
+    await searchActions.SearchInDescriptionsShouldNotReturnFewerResults();
   });
 });

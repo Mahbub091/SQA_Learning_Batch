@@ -1,6 +1,5 @@
-import { test } from '@root/Utilities/fixtures/base.fixture';
+import { test } from '../Utilities/fixtures/base.fixture';
 
-// Tags (e.g. @registration) let you run a group: `npx playwright test --grep @registration`.
 test.describe('Registration', { tag: ['@auth', '@registration'] }, () => {
   test(
     'registers with valid data, shows the success message and logs the user in',
@@ -18,34 +17,37 @@ test.describe('Registration', { tag: ['@auth', '@registration'] }, () => {
     },
   );
 
-  test.describe('required-field validation', () => {
-    // One generated test per required field.
-    for (const field of ['firstName', 'lastName', 'email', 'password'] as const) {
-      test(`shows an error when ${field} is empty`, async ({ userRegisterActions }) => {
-        await userRegisterActions.UserShouldSeeRequiredErrorForField(field);
-      });
-    }
-
-    test('shows every required error on an empty form', async ({ userRegisterActions }) => {
-      await userRegisterActions.UserShouldSeeAllRequiredErrorsOnEmptyForm();
+  for (const field of ['firstName', 'lastName', 'email', 'password'] as const) {
+    test(`required field: shows an error when ${field} is empty`, async ({
+      userRegisterActions,
+    }) => {
+      await userRegisterActions.UserShouldSeeRequiredErrorForField(field);
     });
+  }
+
+  test('required field: shows every required error on an empty form', async ({
+    userRegisterActions,
+  }) => {
+    await userRegisterActions.UserShouldSeeAllRequiredErrorsOnEmptyForm();
   });
 
-  test.describe('invalid data', () => {
-    test('rejects an already registered email', async ({ userRegisterActions }) => {
-      await userRegisterActions.UserShouldSeeErrorForDuplicateEmail();
-    });
+  test('invalid data: rejects an already registered email', async ({ userRegisterActions }) => {
+    await userRegisterActions.UserShouldSeeErrorForDuplicateEmail();
+  });
 
-    test('rejects an invalid email format', async ({ userRegisterActions }) => {
-      await userRegisterActions.UserShouldSeeErrorForInvalidEmailFormat();
-    });
+  test('invalid data: rejects an invalid email format', async ({ userRegisterActions }) => {
+    await userRegisterActions.UserShouldSeeErrorForInvalidEmailFormat();
+  });
 
-    test('rejects a password shorter than 6 characters', async ({ userRegisterActions }) => {
-      await userRegisterActions.UserShouldSeeErrorForTooShortPassword();
-    });
+  test('invalid data: rejects a password shorter than 6 characters', async ({
+    userRegisterActions,
+  }) => {
+    await userRegisterActions.UserShouldSeeErrorForTooShortPassword();
+  });
 
-    test('rejects mismatching password and confirm password', async ({ userRegisterActions }) => {
-      await userRegisterActions.UserShouldSeeErrorWhenPasswordsDoNotMatch();
-    });
+  test('invalid data: rejects mismatching password and confirm password', async ({
+    userRegisterActions,
+  }) => {
+    await userRegisterActions.UserShouldSeeErrorWhenPasswordsDoNotMatch();
   });
 });
