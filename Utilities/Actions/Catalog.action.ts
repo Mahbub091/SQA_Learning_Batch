@@ -1,20 +1,9 @@
 import { Page, test } from '@playwright/test';
-import { CatalogHelper } from '@root/Utilities/Helper/Catalog.helper';
-import {
-  filterCandidatePaths,
-  sortableCategoryPath,
-  sortOptions,
-} from '@root/Utilities/testData/catalog.data';
+import { CatalogHelper } from '../Helper/Catalog.helper';
+import { filterCandidatePaths, sortableCategoryPath, sortOptions } from '../testData/catalog.data';
 
-/** One of the sort options, by its key: 'nameAsc' | 'nameDesc' | 'priceAsc' | 'priceDesc' | 'createdOn'. */
 export type SortKey = keyof typeof sortOptions;
 
-/**
- * Action = a complete test scenario, written as a chain of helper steps.
- * Method names read like a sentence ("User should ..."), so a spec stays one readable line.
- * This class covers the Catalog scenarios (sorting, page size, view mode, price filter, paging).
- * `test.skip(...)` is used when the live shop data does not allow a meaningful check.
- */
 export default class CatalogAction {
   private catalogHelper: CatalogHelper;
 
@@ -22,13 +11,11 @@ export default class CatalogAction {
     this.catalogHelper = new CatalogHelper(page);
   }
 
-  /** The "Sort by" drop-down offers every expected option. */
   async UserShouldSeeAllSortOptions(): Promise<void> {
     await this.catalogHelper.GoToCategory(sortableCategoryPath);
     await this.catalogHelper.AssertSortOptionsAvailable(Object.values(sortOptions));
   }
 
-  /** Sorts the category with the chosen option and checks the resulting order. */
   async UserShouldBeAbleToSort(sortKey: SortKey): Promise<void> {
     await this.catalogHelper.GoToCategory(sortableCategoryPath);
     const before = await this.catalogHelper.GetProductNames();
@@ -49,14 +36,11 @@ export default class CatalogAction {
         await this.catalogHelper.AssertSortedByPrice('desc');
         break;
       case 'createdOn':
-        // There is no visible order to check for "Created on"; only the product set is compared.
         break;
     }
-    // Whatever the order, the same products must still be listed.
     await this.catalogHelper.AssertSameProductsAfterSort(before);
   }
 
-  /** Choosing a smaller page size limits the number of products shown. */
   async UserShouldBeAbleToChangePageSize(): Promise<void> {
     await this.catalogHelper.GoToCategory(sortableCategoryPath);
     const sizes = await this.catalogHelper.GetPageSizeOptions();
@@ -69,7 +53,6 @@ export default class CatalogAction {
     await this.catalogHelper.AssertProductCountAtMost(target);
   }
 
-  /** The user can switch the product list to List view and back to Grid view. */
   async UserShouldBeAbleToSwitchBetweenGridAndListView(): Promise<void> {
     await this.catalogHelper.GoToCategory(sortableCategoryPath);
 
@@ -80,9 +63,7 @@ export default class CatalogAction {
     await this.catalogHelper.AssertViewMode('Grid');
   }
 
-  /** Applying the first price-range link leaves only products inside that range. */
   async UserShouldBeAbleToFilterByPriceRange(): Promise<void> {
-    // Find the first candidate category that actually shows a price filter.
     let filterPath: string | undefined;
     for (const path of filterCandidatePaths) {
       await this.catalogHelper.GoToCategory(path);
@@ -99,13 +80,11 @@ export default class CatalogAction {
     await this.catalogHelper.AssertPricesWithin(range);
   }
 
-  /** With the smallest page size, page 2 works and does not repeat products from page 1. */
   async UserShouldBeAbleToPaginate(): Promise<void> {
     await this.catalogHelper.GoToCategory(sortableCategoryPath);
     const sizes = await this.catalogHelper.GetPageSizeOptions();
     test.skip(sizes.length === 0, 'Page size selector is not available');
 
-    // The smallest page size makes a second page most likely.
     const smallest = Math.min(...sizes);
     if (smallest !== (await this.catalogHelper.GetSelectedPageSize())) {
       await this.catalogHelper.SelectPageSize(smallest);

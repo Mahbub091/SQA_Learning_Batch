@@ -14,6 +14,9 @@
     "test:catalog": "npx playwright test --grep @catalog",
     "test:navigation": "npx playwright test --grep @navigation",
     "test:search": "npx playwright test --grep @search",
+    "test:product": "npx playwright test --grep @product",
+    "test:review": "npx playwright test --grep @review",
+    "test:email-a-friend": "npx playwright test --grep @email-a-friend",
     "typecheck": "tsc --noEmit",
     "report": "npx playwright show-report"
   },

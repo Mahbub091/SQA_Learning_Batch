@@ -1,6 +1,5 @@
-import { test } from '@root/Utilities/fixtures/base.fixture';
+import { test } from '../Utilities/fixtures/base.fixture';
 
-// Tags (e.g. @auth) let you run a group: `npx playwright test --grep @forgot-password`.
 test.describe('Forgot password', { tag: ['@auth', '@forgot-password'] }, () => {
   test('requires an email address', async ({ passwordRecoveryActions }) => {
     await passwordRecoveryActions.UserShouldSeeValidationForEmptyEmail();
@@ -14,7 +13,6 @@ test.describe('Forgot password', { tag: ['@auth', '@forgot-password'] }, () => {
     await passwordRecoveryActions.UserShouldSeeMessageForUnregisteredEmail();
   });
 
-  // @e2e = a longer end-to-end flow (registers a user first).
   test(
     'confirms that instructions were sent for a registered email',
     { tag: ['@e2e'] },

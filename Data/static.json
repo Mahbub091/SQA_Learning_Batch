@@ -1,0 +1,170 @@
+{
+  "topCategories": [
+    { "name": "Books", "path": "/books", "heading": "^books$" },
+    { "name": "Computers", "path": "/computers", "heading": "^computers$" },
+    { "name": "Electronics", "path": "/electronics", "heading": "^electronics$" },
+    { "name": "Apparel & Shoes", "path": "/apparel-shoes", "heading": "^apparel\\s*&\\s*shoes$" },
+    { "name": "Digital downloads", "path": "/digital-downloads", "heading": "^digital downloads$" },
+    { "name": "Jewelry", "path": "/jewelry", "heading": "^jewelry$" },
+    { "name": "Gift Cards", "path": "/gift-cards", "heading": "^gift cards$" }
+  ],
+
+  "subCategories": [
+    {
+      "parent": "Computers",
+      "parentPath": "/computers",
+      "name": "Desktops",
+      "path": "/desktops",
+      "heading": "^desktops$"
+    },
+    {
+      "parent": "Computers",
+      "parentPath": "/computers",
+      "name": "Notebooks",
+      "path": "/notebooks",
+      "heading": "^notebooks$"
+    },
+    {
+      "parent": "Computers",
+      "parentPath": "/computers",
+      "name": "Accessories",
+      "path": "/accessories",
+      "heading": "^accessories$"
+    },
+    {
+      "parent": "Electronics",
+      "parentPath": "/electronics",
+      "name": "Camera, photo",
+      "path": "/camera-photo",
+      "heading": "^camera,\\s*photo$"
+    },
+    {
+      "parent": "Electronics",
+      "parentPath": "/electronics",
+      "name": "Cell phones",
+      "path": "/cell-phones",
+      "heading": "^cell phones$"
+    }
+  ],
+
+  "footerLinks": [
+    { "name": "Sitemap", "path": "/sitemap", "heading": "sitemap" },
+    {
+      "name": "Shipping & returns",
+      "path": "/shipping-returns",
+      "heading": "shipping\\s*&\\s*returns"
+    },
+    { "name": "Privacy notice", "path": "/privacy-policy", "heading": "privacy notice" },
+    { "name": "Conditions of Use", "path": "/conditions-of-use", "heading": "conditions of use" },
+    { "name": "About us", "path": "/about-us", "heading": "about us" },
+    { "name": "Contact us", "path": "/contactus", "heading": "contact us" },
+    { "name": "Search", "path": "/search", "heading": "search" },
+    { "name": "News", "path": "/news", "heading": "news" },
+    { "name": "Blog", "path": "/blog", "heading": "blog" },
+    { "name": "New products", "path": "/newproducts", "heading": "new products" },
+    {
+      "name": "Recently viewed products",
+      "path": "/recentlyviewedproducts",
+      "heading": "recently viewed"
+    },
+    { "name": "Compare products list", "path": "/compareproducts", "heading": "compare products" }
+  ],
+
+  "catalog": {
+    "sortableCategoryPath": "/books",
+    "filterCandidatePaths": ["/desktops", "/notebooks", "/accessories", "/books"],
+    "sortOptions": {
+      "nameAsc": "Name: A to Z",
+      "nameDesc": "Name: Z to A",
+      "priceAsc": "Price: Low to High",
+      "priceDesc": "Price: High to Low",
+      "createdOn": "Created on"
+    }
+  },
+
+  "search": {
+    "exactName": "14.1-inch Laptop",
+    "partialName": "laptop",
+    "caseVariations": ["LAPTOP", "Laptop", "lApToP"],
+    "tooShortTerms": ["a", "ab"],
+    "specialCharacters": "!@#$%^&*()_+-=[]{};:'\",./?|~`",
+    "advanced": {
+      "keyword": "computer",
+      "parentCategory": "Computers",
+      "priceFrom": 1000,
+      "priceTo": 1500,
+      "impossiblePriceFrom": 999999
+    }
+  },
+
+  "productDetail": {
+    "_note": "Names/paths/messages below are the standard nopCommerce sample-data values the Demo Web Shop ships with. Re-check them against the live DOM before trusting exact-text assertions; 'expectedPrice: 0' means 'not verified yet, so only check the price is a positive number'.",
+
+    "customComputer": {
+      "name": "Build your own computer",
+      "path": "/build-your-own-computer",
+      "expectedPrice": 0,
+      "attributeGroups": {
+        "processorLabel": "Processor",
+        "ramLabel": "RAM",
+        "hddLabel": "Hard Drive"
+      }
+    },
+
+    "giftCard": {
+      "name": "$25 Virtual Gift Card",
+      "path": "/25-virtual-gift-card"
+    },
+
+    "quantityBoundaries": {
+      "zero": "0",
+      "negative": "-1",
+      "large": "100000",
+      "nonNumeric": "abc"
+    },
+
+    "reviewRatings": [1, 2, 3, 4, 5]
+  },
+
+  "invalidInputs": {
+    "invalidEmail": "not-an-email"
+  },
+
+  "messages": {
+    "registration": {
+      "success": "your registration completed",
+      "firstNameRequired": "first name is required",
+      "lastNameRequired": "last name is required",
+      "emailRequired": "email is required",
+      "wrongEmail": "wrong email",
+      "passwordRequired": "password is required",
+      "passwordTooShort": "password should have at least 6 characters",
+      "passwordMismatch": "password and confirmation password do not match",
+      "duplicateEmail": "the specified email already exists"
+    },
+    "login": {
+      "unsuccessful": "login was unsuccessful",
+      "noAccount": "no customer account found",
+      "incorrectCredentials": "the credentials provided are incorrect",
+      "emailRequired": "please enter your email"
+    },
+    "passwordRecovery": {
+      "enterEmail": "enter your email",
+      "wrongEmail": "wrong email",
+      "emailSent": "email with instructions has been sent to you",
+      "emailNotFound": "email not found"
+    },
+    "search": {
+      "noResults": "no products were found that matched your criteria",
+      "minLength": "search term minimum length is 3 characters",
+      "emptyAlert": "please enter some search keyword"
+    },
+    "productDetail": {
+      "addedToCart": "the product has been added to your shopping cart",
+      "addedToWishlist": "the product has been added to your wish list",
+      "addedToCompare": "the product has been added to your comparison list",
+      "emailSent": "your message has been successfully sent",
+      "reviewSubmitted": "thank you for your review"
+    }
+  }
+}

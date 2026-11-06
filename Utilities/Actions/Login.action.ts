@@ -1,14 +1,9 @@
 import { Page } from '@playwright/test';
-import { LoginHelper } from '@root/Utilities/Helper/Login.helper';
-import { RegisterHelper } from '@root/Utilities/Helper/Register.helper';
-import { env } from '@root/Utilities/config/env.config';
-import { generateUser, UserData } from '@root/Utilities/testData/user.data';
+import { LoginHelper } from '../Helper/Login.helper';
+import { RegisterHelper } from '../Helper/Register.helper';
+import { env } from '../config/env.config';
+import { generateUser, UserData } from '../testData/user.data';
 
-/**
- * Action = a complete test scenario, written as a chain of helper steps.
- * Method names read like a sentence ("User should ..."), so a spec stays one readable line.
- * This class covers the Login / Logout scenarios.
- */
 export default class LoginAction {
   private loginHelper: LoginHelper;
   private registerHelper: RegisterHelper;
@@ -29,14 +24,12 @@ export default class LoginAction {
     return user;
   }
 
-  /** Logging in with the (non-existing) account from .env shows the "no account" error. */
   async UserShouldSeeProperErrorDuringLoginWithInvalidCredentials(): Promise<void> {
     await this.loginHelper.NavigateToTheLandingPage();
     await this.loginHelper.NavigateToTheLoginPage();
     await this.loginHelper.AssertInvalidCredentialsError();
   }
 
-  /** A newly registered user can log in again and is shown as logged in. */
   async UserShouldLoginWithValidCredentials(): Promise<void> {
     const user = await this.CreateRegisteredUserAndLogout();
 
@@ -44,7 +37,6 @@ export default class LoginAction {
     await this.loginHelper.AssertUserIsLoggedIn(user.email);
   }
 
-  /** A real e-mail with a wrong password is rejected ("credentials provided are incorrect"). */
   async UserShouldSeeErrorWithWrongPassword(): Promise<void> {
     const user = await this.CreateRegisteredUserAndLogout();
 
@@ -53,7 +45,6 @@ export default class LoginAction {
     await this.loginHelper.AssertUserIsLoggedOut();
   }
 
-  /** An e-mail that was never registered is rejected ("no customer account found"). */
   async UserShouldSeeErrorWithUnregisteredEmail(): Promise<void> {
     const unregistered = generateUser();
 
@@ -63,7 +54,6 @@ export default class LoginAction {
     await this.loginHelper.AssertUserIsLoggedOut();
   }
 
-  /** Submitting the login form with empty fields is rejected. */
   async UserShouldSeeErrorWithEmptyFields(): Promise<void> {
     await this.loginHelper.NavigateToTheLandingPage();
     await this.loginHelper.OpenLoginPage();
@@ -71,7 +61,6 @@ export default class LoginAction {
     await this.loginHelper.AssertEmptyLoginRejected();
   }
 
-  /** A logged-in user can log out. */
   async UserShouldBeAbleToLogout(): Promise<void> {
     const user = await this.CreateRegisteredUserAndLogout();
 
@@ -80,10 +69,6 @@ export default class LoginAction {
     await this.loginHelper.Logout();
   }
 
-  /**
-   * "Remember me" ticked   => the login cookie is persistent (has an expiry date).
-   * "Remember me" unticked => the login cookie is a session cookie.
-   */
   async UserSessionShouldFollowRememberMeChoice(rememberMe: boolean): Promise<void> {
     const user = await this.CreateRegisteredUserAndLogout();
 

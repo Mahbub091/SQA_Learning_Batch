@@ -17,48 +17,28 @@ All configuration and sensitive values live in `.env` (git-ignored) and are vali
 
 | Folder | Purpose |
 |---|---|
-| `Data/StaticData.json` | **All expected error / success messages in one place** |
-| `PageObjectModel/` | Locators only (`Login`, `Register`, `PasswordRecovery`, `Header`, `Footer`, `Catalog`, `Search`) |
+| `PageObjectModel/` | Locators only (`Login`, `Register`, `PasswordRecovery`, `Header`, `Footer`, `Catalog`, `Search`, `Product`, `ProductReview`, `EmailAFriend`) |
 | `Utilities/ActionUtils.ts` | Reusable Playwright wrappers |
 | `Utilities/Helper/` | Small steps and assertions per feature |
 | `Utilities/Actions/` | Full scenarios chaining helpers |
 | `Utilities/fixtures/base.fixture.ts` | Injects actions into tests |
-| `Utilities/testData/` | Categories, footer links, search terms, expected messages |
-| `Utilities/testData/fakeDataProvider.ts` | Standalone toolbox for random (faker) users, unique e-mails and strings |
-| `tests/` | Thin specs, tagged for filtering |
-
-## Imports use `@root/`
-
-Every import starts from the project root, so you never write `../../`:
-
-```ts
-import { LoginPage } from '@root/PageObjectModel/Login.page';
-import data from '@root/Data/StaticData.json';
-```
-
-The alias is defined once, in `tsconfig.json` (`"paths": { "@root/*": ["./*"] }`).
-Playwright reads the same setting, so it works when the tests run, not only in the editor.
-
-## Changing an expected message
-
-Open `Data/StaticData.json` and edit the text. Nothing else needs to change:
-`Utilities/testData/messages.data.ts` turns each text into a case-insensitive regex and the
-helpers use that regex in their assertions.
-
-```json
-{
-  "ErrorMessages": { "emailRequiredError": "Email is required" },
-  "SuccessMessages": { "registrationCompleted": "Your registration completed" }
-}
-```
-
-JSON does not allow comments, so the keys are named to explain themselves
-(`<feature><What>Error`, e.g. `searchMinLengthError`).
+| `Utilities/testData/` | `FakeDataProvider` (the only place Faker is used) plus thin wrappers around `data/static.json` and `data/dynamic.json` |
+| `data/` | `static.json` (fixed values: categories, messages, product names) and `dynamic.json` (rules for generated values) |
+| `tests/` | Thin specs, tagged for filtering — one `test.describe` per file, no nesting |
 
 ## Scripts
 
-`npm run test:headless | test:headed | test:ui | test:e2e | test:auth | test:registration | test:login | test:catalog | test:navigation | test:search | typecheck | report`
+`npm run test:headless | test:headed | test:ui | test:e2e | test:auth | test:registration | test:login | test:catalog | test:navigation | test:search | test:product | test:review | test:email-a-friend | typecheck | report`
 
 ## Tags
 
-`@auth @registration @login @forgot-password @navigation @catalog @search @e2e @smoke`
+`@auth @registration @login @forgot-password @navigation @catalog @search @product @review @email-a-friend @e2e @smoke`
+
+## A note on the product detail tests
+
+`data/static.json`'s `productDetail` block uses nopCommerce's standard sample-data names
+("Build your own computer", "$25 Virtual Gift Card") and the platform's conventional field ids
+(`RecipientName`, `Title`, `Rating`, ...). These haven't been checked against this Demo Web Shop
+instance's live DOM, so the first run is likely to need locator or message fixes — see the
+`_note` field in that JSON block and the comments at the top of `Product.page.ts`,
+`ProductReview.page.ts` and `EmailAFriend.page.ts`.

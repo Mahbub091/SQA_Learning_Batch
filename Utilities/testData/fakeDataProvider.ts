@@ -1,66 +1,57 @@
-/**
- * FakeDataProvider = a standalone toolbox that creates random ("fake") test data.
- *
- * Why random data? Every run needs a NEW user (the shop rejects an e-mail that is already
- * registered), and random names / e-mails also stop tests from depending on old data.
- *
- * This file is separate on purpose: no other file imports it yet, so the existing tests are
- * untouched (they still use `generateUser()` from `user.data.ts`). Use it in new tests / helpers.
- *
- * Usage:
- *   import { FakeDataProvider } from '@root/Utilities/testData/fakeDataProvider';
- *   const user = FakeDataProvider.user();                       // a complete new user
- *   const other = FakeDataProvider.user({ email: 'a@b.com' });  // same, but with one value forced
- *
- * Fixed values that must never change (expected messages, search terms ...) do NOT belong here:
- * messages live in `Data/StaticData.json`, search terms in `search.data.ts`.
- */
 import { faker } from '@faker-js/faker';
-import { env } from '@root/Utilities/config/env.config';
-// Only the shape of a user is shared with `user.data.ts` (type import: nothing runs from there).
-import type { UserData } from '@root/Utilities/testData/user.data';
+import { env } from '../config/env.config';
+import { dynamicData } from './data.loader';
 
+export interface UserData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+}
+
+/**
+ * The single place where Faker is used.
+ *
+ * Specs, actions and helpers never import Faker directly; they ask this class for data.
+ * The generation rules (e-mail template, lengths, prefixes) live in `data/dynamic.json`,
+ * and anything sensitive (domain, passwords) comes from `.env` through `env.config.ts`.
+ */
 export class FakeDataProvider {
-  /** A random first name, e.g. "Amina". */
   static firstName(): string {
     return faker.person.firstName();
   }
 
-  /** A random last name, e.g. "Rahman". */
   static lastName(): string {
     return faker.person.lastName();
   }
 
   /**
-   * A new, valid e-mail address that has never been used before.
-   * Format: first.last.<timestamp><5 random letters>@<TEST_EMAIL_DOMAIN from .env>
-   * The timestamp + random letters make a repeat practically impossible.
+   * Builds a unique e-mail from the template in dynamic.json, e.g.
+   * `{firstName}.{lastName}.{unique}@{domain}`. The `{unique}` part is a timestamp plus random
+   * characters, so two calls never return the same address.
    */
   static uniqueEmail(
     firstName: string = this.firstName(),
     lastName: string = this.lastName(),
   ): string {
-    const unique = `${Date.now()}${faker.string.alphanumeric({ length: 5, casing: 'lower' })}`;
-    // Keep only characters that are safe in an e-mail address.
-    return `${firstName}.${lastName}.${unique}@${env.TEST_EMAIL_DOMAIN}`
+    const { emailTemplate, uniqueSuffixLength } = dynamicData.user;
+    const unique = `${Date.now()}${this.alphanumeric(uniqueSuffixLength)}`;
+
+    return emailTemplate
+      .replace('{firstName}', firstName)
+      .replace('{lastName}', lastName)
+      .replace('{unique}', unique)
+      .replace('{domain}', env.TEST_EMAIL_DOMAIN)
       .toLowerCase()
       .replace(/[^a-z0-9.@_-]/g, '');
   }
 
-  /** Text that is NOT an e-mail address, for "wrong email" validation tests. */
-  static invalidEmail(): string {
-    return 'not-an-email';
+  /** A random password of the length set in dynamic.json (not the one stored in .env). */
+  static password(): string {
+    return faker.internet.password({ length: dynamicData.password.length });
   }
 
-  /** A random lower-case string of the given length (default 10), e.g. for unknown search terms. */
-  static randomString(length: number = 10): string {
-    return faker.string.alpha({ length, casing: 'lower' });
-  }
-
-  /**
-   * A brand-new user with random data and the valid password from `.env` (NEW_USER_PASSWORD).
-   * Pass `overrides` to force a value, e.g. `FakeDataProvider.user({ password: env.SHORT_PASSWORD })`.
-   */
+  /** A brand-new user. Pass `overrides` to replace any field for a specific scenario. */
   static user(overrides: Partial<UserData> = {}): UserData {
     const firstName = this.firstName();
     const lastName = this.lastName();
@@ -72,5 +63,42 @@ export class FakeDataProvider {
       password: env.NEW_USER_PASSWORD,
       ...overrides,
     };
+  }
+
+  /** A search term that cannot match any product, different on every call. */
+  static noResultTerm(): string {
+    const { prefix, randomLength } = dynamicData.noResultTerm;
+    return `${prefix}${this.alpha(randomLength)}`;
+  }
+
+  /** A very long random string for boundary tests (length comes from dynamic.json). */
+  static longString(): string {
+    return this.alpha(dynamicData.longString.length);
+  }
+
+  static alpha(length: number): string {
+    return faker.string.alpha({ length, casing: 'lower' });
+  }
+
+  static alphanumeric(length: number): string {
+    return faker.string.alphanumeric({ length, casing: 'lower' });
+  }
+
+  /** A unique product review title, different on every call. */
+  static reviewTitle(): string {
+    const { titleWordCount } = dynamicData.review;
+    return faker.lorem.words(titleWordCount);
+  }
+
+  /** A unique product review body, different on every call. */
+  static reviewText(): string {
+    const { textSentenceCount } = dynamicData.review;
+    return faker.lorem.sentences(textSentenceCount);
+  }
+
+  /** A short personal note for the "email a friend" form. */
+  static personalMessage(): string {
+    const { messageSentenceCount } = dynamicData.emailAFriend;
+    return faker.lorem.sentences(messageSentenceCount);
   }
 }

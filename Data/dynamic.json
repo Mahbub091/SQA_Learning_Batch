@@ -1,0 +1,28 @@
+{
+  "user": {
+    "emailTemplate": "{firstName}.{lastName}.{unique}@{domain}",
+    "uniqueSuffixLength": 5
+  },
+
+  "password": {
+    "length": 12
+  },
+
+  "noResultTerm": {
+    "prefix": "zz",
+    "randomLength": 8
+  },
+
+  "longString": {
+    "length": 500
+  },
+
+  "review": {
+    "titleWordCount": 4,
+    "textSentenceCount": 2
+  },
+
+  "emailAFriend": {
+    "messageSentenceCount": 1
+  }
+}

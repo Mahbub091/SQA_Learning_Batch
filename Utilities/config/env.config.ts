@@ -1,14 +1,8 @@
-/**
- * Reads the `.env` file, checks every value with zod, and exposes them as one typed `env` object.
- * If something is missing or wrong, the run stops immediately with a clear message
- * instead of failing later in a confusing way.
- */
 import dotenv from 'dotenv';
 import { z } from 'zod';
 
 dotenv.config({ quiet: true });
 
-// The rules every environment variable must follow.
 const envSchema = z.object({
   LANDING_PAGE_URL: z.url({
     message: 'must be a full URL, e.g. https://demowebshop.tricentis.com/',
@@ -24,7 +18,6 @@ const envSchema = z.object({
 
 const parsed = envSchema.safeParse(process.env);
 
-// Stop early and list every problem at once.
 if (!parsed.success) {
   const problems = parsed.error.issues
     .map((issue) => `  - ${issue.path.join('.') || 'env'}: ${issue.message}`)
@@ -34,12 +27,10 @@ if (!parsed.success) {
   );
 }
 
-// Make sure the base URL always ends with "/", so paths can be added to it safely.
 const baseUrl = parsed.data.LANDING_PAGE_URL.endsWith('/')
   ? parsed.data.LANDING_PAGE_URL
   : `${parsed.data.LANDING_PAGE_URL}/`;
 
-/** The validated environment values. Import this instead of reading `process.env` directly. */
 export const env = {
   ...parsed.data,
   LANDING_PAGE_URL: baseUrl,
