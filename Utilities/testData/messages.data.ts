@@ -5,3 +5,5 @@ export const registrationMessages = compilePatterns(staticData.messages.registra
 export const loginMessages = compilePatterns(staticData.messages.login);
 export const passwordRecoveryMessages = compilePatterns(staticData.messages.passwordRecovery);
 export const productDetailMessages = compilePatterns(staticData.messages.productDetail);
+export const cartMessages = compilePatterns(staticData.messages.cart);
+export const checkoutMessages = compilePatterns(staticData.messages.checkout);

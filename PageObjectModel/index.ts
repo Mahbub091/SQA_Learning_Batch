@@ -8,3 +8,5 @@ export * from './Search.page';
 export * from './Product.page';
 export * from './ProductReview.page';
 export * from './EmailAFriend.page';
+export * from './Cart.page';
+export * from './Checkout.page';

@@ -126,6 +126,71 @@
     "reviewRatings": [1, 2, 3, 4, 5]
   },
 
+  "cart": {
+    "_note": "primaryProduct/secondaryProduct use nopCommerce's standard sample-data paths. validCoupon/validGiftCard are placeholders — this site has no real active codes, so the 'valid' cases only exercise the UI flow and the 'invalid' cases are the ones expected to reliably fail.",
+
+    "primaryProduct": {
+      "name": "14.1-inch Laptop",
+      "path": "/14-1-inch-laptop",
+      "expectedPrice": 0
+    },
+    "secondaryProduct": {
+      "name": "Build your own computer",
+      "path": "/build-your-own-computer",
+      "expectedPrice": 0
+    },
+
+    "validCoupon": "dummy-valid-coupon",
+    "invalidCoupon": "INVALID-COUPON-CODE",
+    "validGiftCard": "dummy-valid-giftcard",
+    "invalidGiftCard": "INVALID-GIFTCARD-CODE",
+
+    "estimateShipping": {
+      "country": "United States",
+      "state": "California",
+      "zipPostalCode": "90210"
+    }
+  },
+
+  "checkout": {
+    "_note": "Field ids follow nopCommerce's OnePageCheckout view (BillingNewAddress_*, ShippingNewAddress_*, shippingoption, paymentmethod, CardNumber, ...). The card number is one of the standard publicly documented test numbers and is not a real payment instrument.",
+
+    "address": {
+      "country": "United States",
+      "state": "California",
+      "city": "Los Angeles",
+      "address1": "123 Main Street",
+      "zipPostalCode": "90001",
+      "phoneNumber": "5551234567"
+    },
+
+    "shippingMethods": {
+      "ground": "Ground",
+      "nextDayAir": "Next Day Air",
+      "secondDayAir": "2nd Day Air"
+    },
+
+    "paymentMethods": {
+      "cod": "Cash On Delivery",
+      "checkMoneyOrder": "Check / Money Order",
+      "creditCard": "Credit Card",
+      "purchaseOrder": "Purchase Order"
+    },
+
+    "creditCard": {
+      "type": "Visa",
+      "validNumber": "4111111111111111",
+      "invalidNumber": "1234",
+      "expireMonth": "12",
+      "validExpireYear": "2030",
+      "expiredYear": "2020",
+      "cvv": "123",
+      "invalidCvv": "12"
+    },
+
+    "purchaseOrderNumber": "PO-0001"
+  },
+
   "invalidInputs": {
     "invalidEmail": "not-an-email"
   },
@@ -165,6 +230,16 @@
       "addedToCompare": "the product has been added to your comparison list",
       "emailSent": "your message has been successfully sent",
       "reviewSubmitted": "thank you for your review"
+    },
+    "cart": {
+      "empty": "your shopping cart is empty",
+      "termsRequired": "you have to accept the terms of service",
+      "invalidCoupon": "no coupon code could be found",
+      "invalidGiftCard": "the gift card code cannot be found"
+    },
+    "checkout": {
+      "orderCompleted": "your order has been successfully processed",
+      "invalidCardNumber": "credit card number is not valid"
     }
   }
 }

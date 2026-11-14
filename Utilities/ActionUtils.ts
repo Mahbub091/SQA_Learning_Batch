@@ -122,6 +122,11 @@ export default class ActionUtils {
     await this.page.waitForLoadState('networkidle');
   }
 
+  async GoBack(): Promise<void> {
+    await this.page.goBack();
+    await this.page.waitForLoadState('networkidle');
+  }
+
   async GetCookies(): Promise<{ name: string; expires: number }[]> {
     const cookies = await this.page.context().cookies();
     return cookies.map(({ name, expires }) => ({ name, expires }));
