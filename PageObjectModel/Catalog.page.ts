@@ -1,5 +1,5 @@
 import { Page, Locator } from '@playwright/test';
-import { exactNameRegex } from '../Utilities/textUtils';
+import { exactNameRegex } from '@root/Utilities/textUtils';
 
 export class CatalogPage {
   readonly CatalogFeature: {

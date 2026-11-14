@@ -1,5 +1,5 @@
-import { test } from '../Utilities/fixtures/base.fixture';
-import { reviewRatings } from '../Utilities/testData/product.data';
+import { test } from '@root/Utilities/fixtures/base.fixture';
+import { reviewRatings } from '@root/Utilities/testData/product.data';
 
 test.describe('Product reviews', { tag: ['@product', '@review'] }, () => {
   test('guest: rejects an empty review', async ({ productReviewActions }) => {

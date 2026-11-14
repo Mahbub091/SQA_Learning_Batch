@@ -1,5 +1,5 @@
-import { test } from '../Utilities/fixtures/base.fixture';
-import { footerLinks, subCategories, topCategories } from '../Utilities/testData/catalog.data';
+import { test } from '@root/Utilities/fixtures/base.fixture';
+import { footerLinks, subCategories, topCategories } from '@root/Utilities/testData/catalog.data';
 
 test.describe('Navigation', { tag: ['@navigation'] }, () => {
   test('lands on the home page', { tag: ['@e2e', '@smoke'] }, async ({ navigationActions }) => {

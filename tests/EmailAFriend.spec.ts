@@ -1,4 +1,4 @@
-import { test } from '../Utilities/fixtures/base.fixture';
+import { test } from '@root/Utilities/fixtures/base.fixture';
 
 test.describe('Email a friend', { tag: ['@product', '@email-a-friend'] }, () => {
   test('rejects an empty form', async ({ emailAFriendActions }) => {

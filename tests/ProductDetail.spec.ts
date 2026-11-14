@@ -1,5 +1,5 @@
-import { test } from '../Utilities/fixtures/base.fixture';
-import { QuantityBoundaryKey } from '../Utilities/Actions/Product.action';
+import { test } from '@root/Utilities/fixtures/base.fixture';
+import { QuantityBoundaryKey } from '@root/Utilities/Actions/Product.action';
 
 const quantityBoundaryKeys: QuantityBoundaryKey[] = ['zero', 'negative', 'large', 'nonNumeric'];
 

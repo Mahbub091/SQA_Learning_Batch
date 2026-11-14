@@ -1,5 +1,5 @@
-import { test } from '../Utilities/fixtures/base.fixture';
-import { ShippingMethodKey, PaymentMethodKey } from '../Utilities/testData/checkout.data';
+import { test } from '@root/Utilities/fixtures/base.fixture';
+import { ShippingMethodKey, PaymentMethodKey } from '@root/Utilities/testData/checkout.data';
 
 const shippingMethodKeys: ShippingMethodKey[] = ['ground', 'nextDayAir', 'secondDayAir'];
 const paymentMethodKeys: PaymentMethodKey[] = [

@@ -1,5 +1,5 @@
-import { test } from '../Utilities/fixtures/base.fixture';
-import { searchData } from '../Utilities/testData/search.data';
+import { test } from '@root/Utilities/fixtures/base.fixture';
+import { searchData } from '@root/Utilities/testData/search.data';
 
 test.describe('Search', { tag: ['@search'] }, () => {
   test(

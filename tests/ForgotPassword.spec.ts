@@ -1,4 +1,4 @@
-import { test } from '../Utilities/fixtures/base.fixture';
+import { test } from '@root/Utilities/fixtures/base.fixture';
 
 test.describe('Forgot password', { tag: ['@auth', '@forgot-password'] }, () => {
   test('requires an email address', async ({ passwordRecoveryActions }) => {

@@ -1,4 +1,4 @@
-import { test } from '../Utilities/fixtures/base.fixture';
+import { test } from '@root/Utilities/fixtures/base.fixture';
 
 test.describe('Shopping cart', { tag: ['@cart'] }, () => {
   test(

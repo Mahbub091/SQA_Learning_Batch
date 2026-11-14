@@ -1,5 +1,5 @@
-import { test } from '../Utilities/fixtures/base.fixture';
-import { SortKey } from '../Utilities/Actions/Catalog.action';
+import { test } from '@root/Utilities/fixtures/base.fixture';
+import { SortKey } from '@root/Utilities/Actions/Catalog.action';
 
 const sortKeys: SortKey[] = ['nameAsc', 'nameDesc', 'priceAsc', 'priceDesc', 'createdOn'];
 
