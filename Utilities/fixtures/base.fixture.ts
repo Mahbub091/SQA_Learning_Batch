@@ -12,6 +12,7 @@ import ProductReviewActions from '../Actions/ProductReview.action';
 import EmailAFriendActions from '../Actions/EmailAFriend.action';
 import CartActions from '../Actions/Cart.action';
 import CheckoutActions from '../Actions/Checkout.action';
+import AccountActions from '../Actions/Account.action';
 import { LoginPage } from '../../PageObjectModel/Login.page';
 
 interface TestFixtures {
@@ -30,6 +31,7 @@ interface TestFixtures {
   emailAFriendActions: EmailAFriendActions;
   cartActions: CartActions;
   checkoutActions: CheckoutActions;
+  accountActions: AccountActions;
 }
 
 const test = base.extend<TestFixtures>({
@@ -88,6 +90,9 @@ const test = base.extend<TestFixtures>({
   },
   checkoutActions: async ({ runner }, use) => {
     await use(new CheckoutActions(runner.page));
+  },
+  accountActions: async ({ runner }, use) => {
+    await use(new AccountActions(runner.page));
   },
 });
 

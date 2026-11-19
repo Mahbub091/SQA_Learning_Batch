@@ -7,3 +7,4 @@ export const passwordRecoveryMessages = compilePatterns(staticData.messages.pass
 export const productDetailMessages = compilePatterns(staticData.messages.productDetail);
 export const cartMessages = compilePatterns(staticData.messages.cart);
 export const checkoutMessages = compilePatterns(staticData.messages.checkout);
+export const accountMessages = compilePatterns(staticData.messages.account);

@@ -191,6 +191,37 @@
     "purchaseOrderNumber": "PO-0001"
   },
 
+  "account": {
+    "_note": "Field ids follow nopCommerce's CustomerInfo/CustomerAddress/ChangePassword views (FirstName, LastName, Email, CountryId, StateProvinceId, Address1, ...). These haven't been checked against this Demo Web Shop instance's live DOM, so verify them the first time this suite runs — see the comment at the top of Account.page.ts.",
+
+    "updatedInfo": {
+      "firstName": "Updated",
+      "lastName": "Customer"
+    },
+
+    "newAddress": {
+      "company": "Tricentis",
+      "country": "United States",
+      "state": "California",
+      "city": "Los Angeles",
+      "address1": "456 Market Street",
+      "address2": "Suite 100",
+      "zipPostalCode": "90002",
+      "phoneNumber": "5559876543",
+      "faxNumber": "5559876544"
+    },
+
+    "editedAddress": {
+      "city": "San Francisco",
+      "address1": "789 Mission Street"
+    },
+
+    "orderProduct": {
+      "name": "14.1-inch Laptop",
+      "path": "/14-1-inch-laptop"
+    }
+  },
+
   "invalidInputs": {
     "invalidEmail": "not-an-email"
   },
@@ -240,6 +271,15 @@
     "checkout": {
       "orderCompleted": "your order has been successfully processed",
       "invalidCardNumber": "credit card number is not valid"
+    },
+    "account": {
+      "infoUpdated": "the information has been updated successfully",
+      "addressAdded": "the new address has been added successfully",
+      "addressDeleted": "the address has been deleted successfully",
+      "passwordChanged": "password was changed",
+      "oldPasswordWrong": "old password doesn't match",
+      "passwordTooShort": "password should have at least 6 characters",
+      "passwordMismatch": "password and confirmation password do not match"
     }
   }
 }

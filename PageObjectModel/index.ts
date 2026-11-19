@@ -10,3 +10,4 @@ export * from './ProductReview.page';
 export * from './EmailAFriend.page';
 export * from './Cart.page';
 export * from './Checkout.page';
+export * from './Account.page';
